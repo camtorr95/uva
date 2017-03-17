@@ -1,0 +1,61 @@
+struct node
+{
+    int val;
+    node *next;
+};
+
+bool f(node **ns,const int &l, const int &n)
+{
+    bool visited[n];
+    bool colored[n];
+    int que[n];
+    que[0] = (*ns)->val;
+    for(int i=0; i<n; ++i)
+    {
+        node *nodo = ns[que[i]];
+        visited[que[i]] = true;
+        for(int x=i+1; nodo->val!=-1; ++x)
+        {
+            if(visited[nodo->val])
+            {
+                if(colored[que[i]] == colored[nodo->val])
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                visited[nodo->val] = true;
+                if(!colored[que[i]])
+                {
+                    colored[nodo->val] = true;
+                }
+            }
+            que[x] = nodo->val;
+            nodo = nodo->next;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    int n;
+    for(scanf("%d", &n); n!=0; scanf("%d", &n))
+    {
+        int l;
+        node **lista[n]{NULL};
+        scanf("%d", &l);
+        for(int i=0; i<l; ++i)
+        {
+            int a,b;
+            scanf("%d %d", &a, &b);
+        }
+
+        //if(f(lista,l,n))
+        //    printf("BICOLORABLE.\n");
+        //else
+        //    printf("NOT BICOLORABLE.\n");
+    }
+    return 0;
+}
